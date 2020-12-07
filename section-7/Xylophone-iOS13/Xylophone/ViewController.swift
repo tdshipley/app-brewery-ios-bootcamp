@@ -34,32 +34,34 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func cNoteButtonPressed(_ sender: UIButton) {
-        playSound(soundUrl: cSoundURL)
+    fileprivate func playSoundAndDimButton(_ sender: UIButton, soundUrl: URL) {
+        sender.alpha = 0.5
+        playSound(soundUrl: soundUrl)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            //Bring's sender's opacity back up to fully opaque.
+            sender.alpha = 1.0
+        }
     }
     
-    @IBAction func dNoteButtonPressed(_ sender: UIButton) {
-        playSound(soundUrl: dSoundURL)
-    }
-    
-    @IBAction func eNoteButtonPressed(_ sender: UIButton) {
-        playSound(soundUrl: eSoundURL)
-    }
-    
-    @IBAction func fNoteButtonPressed(_ sender: UIButton) {
-        playSound(soundUrl: fSoundURL)
-    }
-    
-    @IBAction func gNoteButtonPressed(_ sender: UIButton) {
-        playSound(soundUrl: gSoundURL)
-    }
-    
-    @IBAction func aNoteButtonPressed(_ sender: UIButton) {
-        playSound(soundUrl: aSoundURL)
-    }
-    
-    @IBAction func bNoteButtonPressed(_ sender: UIButton) {
-        playSound(soundUrl: bSoundURL)
+    @IBAction func noteButtonPressed(_ sender: UIButton) {
+        switch sender.currentTitle {
+        case "C":
+            playSoundAndDimButton(sender, soundUrl: cSoundURL)
+        case "D":
+            playSoundAndDimButton(sender, soundUrl: dSoundURL)
+        case "E":
+            playSoundAndDimButton(sender, soundUrl: eSoundURL)
+        case "F":
+            playSoundAndDimButton(sender, soundUrl: fSoundURL)
+        case "G":
+            playSoundAndDimButton(sender, soundUrl: gSoundURL)
+        case "A":
+            playSoundAndDimButton(sender, soundUrl: aSoundURL)
+        case "B":
+            playSoundAndDimButton(sender, soundUrl: bSoundURL)
+        default:
+            print("Bad thing happened")
+        }
     }
 }
 
